@@ -609,4 +609,4 @@ for i in l:
     print(i)
 ```
 
-![image-20221107110612504](E:/github/python-tutorial/assets/image-20221107110612504.png)
+![image-20221107110612504](./assets/image-20221107110612504.png)
