@@ -603,6 +603,10 @@ for i in l:
 也可以指定步长
 
 ```python
-
+# 设置步长
+l = range(1, 10, 2)  # 左开右闭区间[1, 10)内，按照步长等于2取值，结果是[1, 3, 5, 7, 9]
+for i in l:
+    print(i)
 ```
 
+![image-20221107110612504](E:/github/python-tutorial/assets/image-20221107110612504.png)
