@@ -1,3 +1,5 @@
+> Python学习笔记
+
 # Python安装
 
 打开官网https://www.python.org，根据下图进行安装（Mac版）
@@ -218,6 +220,8 @@ print(s2)
 
 ## List（集合）
 
+### 基本使用
+
 List是集合类型，使用[]来定义数据，请看如下代码
 
 ```python
@@ -241,15 +245,225 @@ print(l2)  # [10, '曹操', 1.2, (1+2j), '刘备']
 # 删除元素
 del l2[len(l2) - 1]
 print(l2)  # [10, '曹操', 1.2, (1+2j)]
+# 循环遍历
+for i in l2 :
+    print(i)
 ```
 
-这里简单介绍下，List内容较多。之后慢慢学习。
+### List的切片
+
+这里开始的时候忘记写了，可以看元组，语法是一样的。(⊙﹏⊙)
 
 ## Tuple（元组）
 
+元组类似List也是集合的一种形式，使用小括号定义，元组的元素是不允许修改的。
+
+### 基本使用
+
+```python
+# 定义元组
+t1 = (1, "python", 1.24)
+# 特别注意如果元组之后一个元素，不能忽略后面的逗号
+t2 = (2,)
+print(type(t2))  # <class 'tuple'>
+# 获取元组，使用下标获取元素
+print(t1[0])  # 1
+# 元组是不能修改元素的，但是可以将两个元组组合到一起
+t3 = t1 + t2
+print(t3)  # (1, 'python', 1.24, 2)
+```
+
+### 复制元组
+
+元组可以使用*运算符，拷贝多份
+
+```python
+# 元组运算符*
+t4 = (1, )
+print(t4 * 3)  # (1, 1, 1)
+```
+
+### 判断元素是否存在
+
+使用in关键字
+
+```python
+print(1 in t4)  # True
+```
+
+### 循环
+
+```python
+# 循环
+for i in t4:
+    print(i)  # 1
+```
+
+### 元组的切片
+
+截取元素，使用[startIndex:endIndex:step]的形式，startIndex和endIndex都可以省略，startIndex省略等价于0，如果endIndex省略则等价于最大index。
+
+当步长step=1的时候可以省略后面的：。
+
+```python
+# 截取元组
+t5 = (1, 2, 3, 4)
+# 只用冒号则结果跟原元组一样
+print(t5[:])  # (1, 2, 3, 4)
+# 截取第二个到尾部
+print(t5[1:])  # (2, 3, 4)
+# 可以使用复数
+print(t5[1: -1])  # (2, 3)
+# 也可以指定步长
+print(t5[1:1:1])  # 3
+```
+
+### 元组的简化定义
+
+元组定义使用括号，但是也可以省略括号，要求格式必须正确才行。
+
+```python
+# 元组简化定义方法
+t6 = 1, 2, 4, ("a", 1)
+print(type(t6))  # <class 'tuple'>
+```
+
+### 元组的比较
+
+```python
+# 元组的比较
+t7 = (1, 2)
+t8 = (2, 1)
+print(t7 > t8)  # Flase
+print(t7 < t8)  # True
+print(t7 == t8)  # False
+```
+
+### 获取元组最大值和最小值
+
+```python
+# 获取元组中最大值与最小值
+print(min(t7))  # 1
+print(max(t8))  # 2
+```
+
+### 列表、元组互相转化
+
+使用tuple(列表)函数进行转化，反之使用list函数
+
+```python
+# 列表转化为元组
+t9 = tuple([1, 2, 4])
+print(type(t9))  # <class 'tuple'>
+print(t9)  # (1, 2, 4)
+# 将元组转化为list
+t10 = list(t9)
+print(type(t10))  # <class 'list'>
+print(t10)  # [1, 2, 4]
+```
+
+### 元组长度
+
+使用len函数，len是个通用函数，可以获取很多类型数据的长度。
+
+```
+# 元组长度
+print(len(t9))  # 3
+```
+
 ## Set（集合）
 
+set也是一中集合，set要求存储的数组中不重复，无顺序。类似java中的hashset。
+
+### 定义set
+
+set使用大括号定义,比如s={1, 2, 3}，也可以使用set函数来创建set。例如set(1, 2, 3)
+
+```python
+# 定义set
+s1 = {1, 2, 3}
+print(f"s1的类型是{type(s1)},，值是{s1}")  # s1的类型是<class 'set'>,，值是{1, 2, 3}
+# 也可以使用set函数，传递一个集合（比如List）进行创建
+l1 = [1, 2, 1]
+s2 = set(l1)
+print(f"s2的类型是{type(s2)},，值是{s2}")  # s2的类型是<class 'set'>,，值是{1, 2}
+```
+
+### 添加元素
+
+```python
+# 添加元素
+s3 = {1}
+s3.add(1)
+s3.add(2)
+print(s3)  # {1, 2}
+```
+
+### 删除元素
+
+```python
+# 删除元素
+s3.remove(2)
+print(s3)  # {1}
+```
+
+### 清空元素
+
+```python
+# 清空元素
+s3.clear()
+print(s3)  # set()
+```
+
+### 拷贝元素
+
+.copy()方法是一个深拷贝。
+
+```python
+# 拷贝元素
+s4 = {1}
+s5 = s4.copy()
+print(s4)  # {1}
+print(s5)  # {1}
+# 给s5增加个2
+s5.add(2)
+print(s4)  # {1}
+print(s5)  # {1, 2}
+```
+
+还有很多方法。。。。
+
 ## Dictionary（字典）
+
+字典类似java或者go中的map，kv结构
+
+### 定义字典
+
+字典通过大括号定义，内部key和value使用冒号分隔，多个kv使用逗号分隔。都是英文符号。
+
+```python
+# 定义字典
+d1 = {"k1": "v1"}
+print(f"d1的类型是{type(d1)}, 值是{d1}")
+```
+
+### 增删改查
+
+增删改查等操作都通过key进行操作。
+
+```python
+# 添加
+d1["k2"] = 1
+print(d1)  # {'k1': 'v1', 'k2': 1}
+# 删除
+del d1["k1"]
+print(d1)  # {'k2': 1}
+# 修改
+d1["k2"] = 2
+print(d1)  # {'k2': 2}
+# 查询
+print(d1["k2"])  # 2
+```
 
 # 数据类型转换
 
@@ -609,4 +823,176 @@ for i in l:
     print(i)
 ```
 
-![image-20221107110612504](./assets/image-20221107110612504.png)
+![image-20221107110612504](https://itlab1024-1256529903.cos.ap-beijing.myqcloud.com/202211071532848.png)
+
+# For循环临时变量作用域
+
+for循环中的临时变量能够在外部使用，但是规范不建议使用。
+
+```python
+for i in range(1):
+    print("for循环内部使用" + str(i))
+print(i)  # 使用没有问题，但是规范是不建议的。
+```
+
+![image-20221107123926214](https://itlab1024-1256529903.cos.ap-beijing.myqcloud.com/202211071532849.png)
+
+# 循环中断
+
+## coninue
+
+continu关键字的意思是继续，在循环体内，使用该关键字代表本地循环结束，继续进行下一次循环。
+
+```python
+# continue演示
+for i in range(3):
+    if i == 1:
+        continue
+    print(f"循环内i={i}")
+print("循环执行完毕")
+```
+
+![image-20221107124540969](https://itlab1024-1256529903.cos.ap-beijing.myqcloud.com/202211071532850.png)
+
+可以看到当i = 1的时候，没有打印出“循环内i=1”，而是跳过了本次，继续下一次（i==2）.
+
+## break
+
+break代表中止，与continue相同的是本地循环中止，不同的是也不会继续向下循环，而是跳出for循环体。
+
+```python
+# break演示
+for i in range(3):
+    if i == 1:
+        break
+    print(f"循环内i={i}")
+print("循环执行完毕")
+```
+
+![image-20221107124933807](https://itlab1024-1256529903.cos.ap-beijing.myqcloud.com/202211071532851.png)
+
+可以看到当i == 1的时候，直接跳出循环体，执行循环体外部的语句。
+
+# 函数
+
+## 说明
+
+函数是组织好的，可重复使用的一段代码。python中使用def作为函数的声明关键字。
+
+函数定义格式如下：
+
+```python
+def 函数名(参数列表):
+	函数体
+	return 返回值
+```
+
+## 基本使用
+
+看一个例子：第一个add函数，求两个数的和
+
+```python
+i = 1
+j = 2
+
+
+# add函数，求两个数的和
+def add(x, y):
+    return x + y
+
+
+print(add(i, j))  # 3
+```
+
+**特别说明**：如果不需要传递参数或者不需要返回值都可以省略，例如下面的例子：
+
+```python
+# 无参无返回值
+def print_msg():
+    print("hello python")
+```
+
+其实上面说的无返回值也不准确，其实是有返回值，返回的是None，只不过他代表空。
+
+```python
+print(type(print_msg()))  # <class 'NoneType'>
+```
+
+## 函数说明注释
+
+函数说明使用三引号，写在函数体之前（这跟其他语言还是不同的，其他很多语言都是写在函数上方）。
+
+```
+def func_comment(a, b):
+    """
+    函数的说明写在这里
+    :param a: 每个参数的说明写在这里
+    :param b: 每个参数的说明写在这里
+    :return: 返回值的说明写在这里
+    """
+    print("这是函数体")
+```
+
+特别注意格式问题：:param a: 每个参数的说明写在这里，格式不能变，能变的只有后面的说明性文字。
+
+## 函数中变量作用域
+
+函数中的变量只能在函数中使用
+
+```python
+# 函数中变量作用域
+def result():
+    r = 1
+    print(r)
+# print(r)  # 次数是获取不到变量r的
+```
+
+## 函数的多返回值
+
+函数多返回值是个很好的设计，go语言也采取了这种方式，而java并未采取。
+
+python中使用return a, b这种用逗号分隔的方式返回多值，也通过r1, r2 = 函数这种方式接收多值。看代码
+
+```python
+# 多返回值
+def compute(x, y):
+    return x + y, x - y
+
+
+r1, r2 = compute(1, 2)
+print(r1)  # 3
+print(r2)  # -1
+```
+
+# 多参数传递方式
+
+我们可以像上面compute(1, 2)那样传递参数，但是参数多的时候可能并不友好，出现问题不好发现。python提供了通过参数名=参数值的方式传递，这种方式也可以不按照顺序传递参数。
+
+```python
+# 参数的传递方式
+compute(x=1, y=2)
+```
+
+python对推荐=左右没有空格。
+
+### 函数作为参数
+
+```python
+# 函数参数
+# 我可以在定义一个参数，参数的类型是一个函数。
+def func_params(compute):
+    return compute(1, 2)
+
+
+print(func_params(compute))  # (3, -1)
+```
+
+### 匿名函数
+
+匿名函数使用lambda关键字定义，当我们不关系函数的名字，只关系函数具体逻辑的时候就可以使用匿名函数。
+
+```python
+# 匿名函数
+# 上面的函数就可以使用匿名函数调用
+print(func_params(lambda x, y: x + y))  # 3
+```
